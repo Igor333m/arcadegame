@@ -1,10 +1,12 @@
 // Enemies our player must avoid
-let Enemy = function() {
+let Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
+    this.x = x;
+    this.y = y;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -14,6 +16,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x += dt * 50;
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -54,17 +58,18 @@ class Player {
                 break;
 
             case "up":
-                if (this.y === 0) {
+                console.log(this.y);
+                if (this.y === -25) {
                     break;
                 }
-                this.y -= 100;
+                this.y -= 85;
                 break;
 
             case "down":
                 if (this.y === 400) {
                         break;
                     }
-                this.y += 100;
+                this.y += 85;
                 break;
         }
     }
@@ -78,7 +83,12 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let allEnemies = [];
+let enemy1 = new Enemy(-100, 60);
+let enemy2 = new Enemy(-100, 145);
+let enemy3 = new Enemy(-100, 230);
+
+let allEnemies = [enemy1, enemy2, enemy3];
+
 let player = new Player('images/horn-girl.png', 200, 400);
 
 
