@@ -33,12 +33,40 @@ class Player {
     }
 
     render() {
-        console.log(this.sprite);
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-    handleInput() {
+    handleInput(key) {
+        
+        switch (key) {
+            case "left":
+                if (this.x === 0) {
+                    break;
+                }
+                this.x -= 100;
+                break;
 
+            case "right":
+                if (this.x === 400) {
+                    break;
+                }
+                this.x += 100;
+                break;
+
+            case "up":
+                if (this.y === 0) {
+                    break;
+                }
+                this.y -= 100;
+                break;
+
+            case "down":
+                if (this.y === 400) {
+                        break;
+                    }
+                this.y += 100;
+                break;
+        }
     }
 
     update(dt) {
@@ -51,7 +79,7 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
-let player = new Player('images/horn-girl.png', 400, 400);
+let player = new Player('images/horn-girl.png', 200, 400);
 
 
 // This listens for key presses and sends the keys to your
