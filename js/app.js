@@ -23,7 +23,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += dt * this.bugSpeed;
+    this.x += Math.round(dt * this.bugSpeed);
+    // console.log("bX: " + this.x + " , y: " + this.y);
     if (this.x >= 900) {
         this.x = -200;
         this.speed();
@@ -34,7 +35,6 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.speed = function() {
     let speed = Math.floor(Math.random() * 300) + 200;
     setTimeout( () => {
-        //bugSpeed = Math.floor(Math.random() * 300) + Math.floor(Math.random() * 70) + 1;
     },100);
     return this.bugSpeed =  speed;
 };
@@ -69,6 +69,7 @@ class Player {
                     break;
                 }
                 this.x -= 101;
+                console.log("x: " + this.x);
                 break;
 
             case "right":
@@ -76,6 +77,7 @@ class Player {
                     break;
                 }
                 this.x += 101;
+                console.log("x: " + this.x);
                 break;
 
             case "up":
@@ -83,23 +85,31 @@ class Player {
                     break;
                 }
                 this.y -= 85;
-                                console.log(this.y);
-
+                console.log("y: " + this.y);
                 break;
 
             case "down":
-                console.log(this.y);
-
                 if (this.y === 483) {
                         break;
                     }
                 this.y += 85;
+                console.log("y: " + this.y);
                 break;
         }
     }
 
     update(dt) {
-
+        allEnemies.forEach( (bug) => {
+            if (Math.round(bug.x) < this.x && Math.round(bug.x) > this.x - 100) {
+                console.log("hi: x");
+                if (Math.round(bug.y === this.y)) {
+                    console.log("hi: y");
+                    this.x = 0;
+                    this.y = 483;
+                }
+            }
+            console.log();
+        });
     }
 
 }
@@ -107,14 +117,14 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let enemy1 = new Enemy(-100, 60);
-let enemy2 = new Enemy(-100, 60);
-let enemy3 = new Enemy(-200, 145);
-let enemy4 = new Enemy(-200, 145);
-let enemy5 = new Enemy(-200, 230);
-let enemy6 = new Enemy(-300, 230);
-let enemy7 = new Enemy(-200, 325);
-let enemy8 = new Enemy(-400, 325);
+let enemy1 = new Enemy(-100, 58);
+let enemy2 = new Enemy(-100, 58);
+let enemy3 = new Enemy(-200, 143);
+let enemy4 = new Enemy(-200, 143);
+let enemy5 = new Enemy(-200, 228);
+let enemy6 = new Enemy(-300, 228);
+let enemy7 = new Enemy(-398, 313);
+let enemy8 = new Enemy(-398, 313);
 
 let player = new Player('images/horn-girl.png', 0, 483);
 
