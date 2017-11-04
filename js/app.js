@@ -1,6 +1,7 @@
 
 let allEnemies = [];
 
+
 // Enemies our player must avoid
 let Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
@@ -14,8 +15,6 @@ let Enemy = function(x, y) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    console.log(this);
-
 };
 
 // Update the enemy's position, required method for game
@@ -25,7 +24,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += dt * this.bugSpeed;
-    if (this.x >= 600) {
+    if (this.x >= 900) {
         this.x = -200;
         this.speed();
     }
@@ -69,25 +68,29 @@ class Player {
                 if (this.x === 0) {
                     break;
                 }
-                this.x -= 100;
+                this.x -= 101;
                 break;
 
             case "right":
-                if (this.x === 400) {
+                if (this.x >= 707) {
                     break;
                 }
-                this.x += 100;
+                this.x += 101;
                 break;
 
             case "up":
-                if (this.y === -25) {
+                if (this.y === -27) {
                     break;
                 }
                 this.y -= 85;
+                                console.log(this.y);
+
                 break;
 
             case "down":
-                if (this.y === 400) {
+                console.log(this.y);
+
+                if (this.y === 483) {
                         break;
                     }
                 this.y += 85;
@@ -105,10 +108,13 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let enemy1 = new Enemy(-100, 60);
-let enemy2 = new Enemy(-200, 145);
-let enemy3 = new Enemy(-200, 230);
+let enemy2 = new Enemy(-100, 60);
+let enemy3 = new Enemy(-200, 145);
+let enemy4 = new Enemy(-200, 145);
+let enemy5 = new Enemy(-200, 230);
+let enemy6 = new Enemy(-300, 230);
 
-let player = new Player('images/horn-girl.png', 200, 400);
+let player = new Player('images/horn-girl.png', 0, 483);
 
 
 // This listens for key presses and sends the keys to your
