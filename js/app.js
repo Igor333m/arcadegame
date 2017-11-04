@@ -113,6 +113,8 @@ let enemy3 = new Enemy(-200, 145);
 let enemy4 = new Enemy(-200, 145);
 let enemy5 = new Enemy(-200, 230);
 let enemy6 = new Enemy(-300, 230);
+let enemy7 = new Enemy(-200, 325);
+let enemy8 = new Enemy(-400, 325);
 
 let player = new Player('images/horn-girl.png', 0, 483);
 
