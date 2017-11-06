@@ -10,10 +10,14 @@ header {
 }
 
 img {
-	width: 6%;
+	width: 5%;
+	/*border: 1px solid red;*/
+
 }
 
 .health {
-	float: left;
+	display: inline-block;
+	padding-left: 10px;
+	vertical-align: 20px;
 	font-size: 50px;
 }

@@ -55,6 +55,7 @@ class Player {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
+        this.health = $(".health").text();
         this.audio = {
             bug: new Audio('audio/bug.wav'),
             door: new Audio('audio/door.wav'),
@@ -106,15 +107,19 @@ class Player {
     }
 
     update(dt) {
+        // Player coallision with bug, returned to starting position
         allEnemies.forEach( (bug) => {
             if (Math.round(bug.x) < this.x && Math.round(bug.x) > this.x - 100) {
                 if (Math.round(bug.y === this.y)) {
                     this.playSound("bug");
+                    this.health -=1;
+                    $(".health").text(this.health);
                     this.x = 0;
                     this.y = 483;
                 }
             }
         });
+        // Player enters water, returned to starting position
         if (this.y === -27 ) {
             this.x = 0;
             this.y = 483;
