@@ -116,6 +116,9 @@ class Player {
                 if (Math.round(bug.y === this.y)) {
                     this.audio.bug.play();
                     this.health -=1;
+                    if (this.health === 0) {
+                        gameOver();
+                    }
                     $(".health").text(this.health);
                     this.x = 0;
                     this.y = 483;
@@ -206,6 +209,18 @@ class Item {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
+}
+
+function gameOver() {
+    player.health = 3;
+    player.points = 0;
+    $(".points").text(0);
+    $(".key").text(0);
+    $(".star").text(0);
+    $(".gem-blue").text(0);
+    $(".gem-green").text(0);
+    $(".gem-orange").text(0);
+
 }
 
 // Now instantiate your objects.
