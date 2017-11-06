@@ -3,6 +3,9 @@ let allEnemies = [];
 
 let allItems = [];
 
+let gemOrangePoints = $(".gem-orange");
+let gemGreenPoints = $(".gem-green");
+let gemBluePoints = $(".gem-blue");
 
 // Enemies our player must avoid
 let Enemy = function(x, y) {
@@ -120,7 +123,7 @@ class Player {
                         gameOver();
                     }
                     $(".health").text(this.health);
-                    this.x = 0;
+                    this.x = 303;
                     this.y = 483;
                 }
             }
@@ -164,21 +167,21 @@ class Player {
                     this.audio.gem.play();
                     this.points += 150;
                     $(".points").text(this.points);
-                    $(".gem-blue").text(Number($(".gem-blue").text()) + 1 );
+                    gemBluePoints.text(Number($(".gem-blue").text()) + 1 );
                     break;
                 }
                 case "gem-green": {
                     this.audio.gem.play();
                     this.points += 250;
                     $(".points").text(this.points);
-                    $(".gem-green").text(Number($(".gem-green").text()) + 1 );
+                    gemGreenPoints.text(Number($(".gem-green").text()) + 1 );
                     break;
                 }
                 case "gem-orange": {
                     this.audio.gem.play();
                     this.points += 500;
                     $(".points").text(this.points);
-                    $(".gem-orange").text(Number($(".gem-orange").text()) + 1 );
+                    gemOrangePoints.text(Number($(".gem-orange").text()) + 1 );
                     break;
                 }
                 case "heart": {
@@ -212,6 +215,30 @@ class Item {
 }
 
 function gameOver() {
+    $("#winPoints").text(player.points);
+    $("#winKeys").text($(".key").text());
+    $("#winStars").text($(".star").text());
+    $("#winGems").text( Number(gemBluePoints.text()) + Number(gemGreenPoints.text()) +  Number(gemOrangePoints.text()) );
+    $(".modal").show();
+    // Trigger checker transition using jQuery Transit plugin
+    $(".checker").transition({
+        "background-position": "-7980px 0",
+        transition: "background 1s steps(38)"});
+
+}
+
+// Restart button
+let restartClick = $(".restart").click(function() {
+    restartGame();
+});
+
+/**
+* @descripton Restarts the game, moves, stars, time and hides the modal
+* @returns {undefined}
+*/
+function restartGame() {
+    allEnemies = [];
+    allItems = [];
     player.health = 3;
     player.points = 0;
     $(".points").text(0);
@@ -220,31 +247,54 @@ function gameOver() {
     $(".gem-blue").text(0);
     $(".gem-green").text(0);
     $(".gem-orange").text(0);
+    $(".modal").hide();
+    // Set win checker to start position
+    $(".checker").transition({
+        "background-position": "0 0"});
+    // Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+// Place the player object in a variable called player
+    key = new Item('images/key.png', 404, 313, "key");
+    star = new Item('images/star.png', 303, 143, "star");
+    gemBlue = new Item('images/gem-blue.png', 101, 143, "gem-blue");
+    gemGreen = new Item('images/gem-green.png', 202, 143, "gem-green");
+    gemOrange = new Item('images/gem-orange.png', 404, 143, "gem-orange");
+    heart = new Item('images/heart.png', 404, 228, "heart");
 
+    enemy1 = new Enemy(-100, 58);
+    enemy2 = new Enemy(-100, 58);
+    enemy3 = new Enemy(-200, 143);
+    enemy4 = new Enemy(-200, 143);
+    enemy5 = new Enemy(-200, 228);
+    enemy6 = new Enemy(-300, 228);
+    enemy7 = new Enemy(-398, 313);
+    enemy8 = new Enemy(-398, 313);
 }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let key = new Item('images/key.png', 404, 313, "key");
-let star = new Item('images/star.png', 303, 143, "star");
-let gemBlue = new Item('images/gem-blue.png', 101, 143, "gem-blue");
-let gemGreen = new Item('images/gem-green.png', 202, 143, "gem-green");
-let gemOrange = new Item('images/gem-orange.png', 404, 143, "gem-orange");
-let heart = new Item('images/heart.png', 404, 228, "heart");
+let key;
+let star;
+let gemBlue;
+let gemGreen;
+let gemOrange;
+let heart;
 
-let enemy1 = new Enemy(-100, 58);
-let enemy2 = new Enemy(-100, 58);
-let enemy3 = new Enemy(-200, 143);
-let enemy4 = new Enemy(-200, 143);
-let enemy5 = new Enemy(-200, 228);
-let enemy6 = new Enemy(-300, 228);
-let enemy7 = new Enemy(-398, 313);
-let enemy8 = new Enemy(-398, 313);
+let enemy1;
+let enemy2;
+let enemy3;
+let enemy4;
+let enemy5;
+let enemy6;
+let enemy7;
+let enemy8;
 
 
 
-let player = new Player('images/horn-girl.png', 0, 483);
+let player = new Player('images/horn-girl.png', 303, 483);
+
+
 
 // Adds selected caracter image for points
 $(".caracter-points img:nth-child(2)").attr("src", player.sprite);
@@ -261,3 +311,5 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+restartGame();
