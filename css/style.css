@@ -35,3 +35,48 @@ img {
 	position: relative;
 	left: -38px;
 }
+
+/* Tooltips for items */
+.div-items {
+	display: inline;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+header div:first-child:hover .tooltiptext-health {
+	visibility: visible;
+}
+
+header div:nth-child(2):hover .tooltiptext-key {
+	visibility: visible;
+}
+
+header div:nth-child(3):hover .tooltiptext-star {
+	visibility: visible;
+}
+
+header div:nth-child(4):hover .tooltiptext-gem-blue {
+	visibility: visible;
+}
+
+header div:nth-child(5):hover .tooltiptext-gem-green {
+	visibility: visible;
+}
+
+header div:nth-child(6):hover .tooltiptext-gem-orange {
+	visibility: visible;
+}
+
+.caracter-points:hover .tooltiptext-caracter-points {
+	visibility: visible;
+}
