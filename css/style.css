@@ -75,6 +75,7 @@ header div:nth-child(6):hover .tooltiptext-gem-orange {
  */
  .modal {
     display: none;
+    background-color: white;
     text-align: center;
     left: 0;
     top: 0;
