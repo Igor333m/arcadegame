@@ -151,6 +151,8 @@ let enemy8 = new Enemy(-398, 313);
 
 let player = new Player('images/horn-girl.png', 0, 483);
 
+// Adds selected caracter image for points
+$(".caracter-points img:nth-child(2)").attr("src", player.sprite);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

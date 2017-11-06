@@ -7,17 +7,31 @@ body {
 header {
 	width: 909px;
 	height: 60px;
+	margin: auto;
 }
 
 img {
-	width: 5%;
+	width: 4%;
 	/*border: 1px solid red;*/
 
 }
 
-.health {
-	display: inline-block;
-	padding-left: 10px;
-	vertical-align: 20px;
+.items {
+	padding: 0 35px 0 10px;
+	vertical-align: 10px;
 	font-size: 50px;
+}
+
+.points {
+	position: relative;
+	left: -38px;
+}
+
+.caracter-points {
+	display: inline;
+}
+
+.caracter-points img:nth-child(2) {
+	position: relative;
+	left: -38px;
 }
