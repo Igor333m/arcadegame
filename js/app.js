@@ -1,6 +1,8 @@
 
 let allEnemies = [];
 
+let allItems = [];
+
 
 // Enemies our player must avoid
 let Enemy = function(x, y) {
@@ -55,7 +57,8 @@ class Player {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
-        this.health = $(".health").text();
+        this.health = Number($(".health").text());
+        this.points = Number($(".points").text());
         this.audio = {
             bug: new Audio('audio/bug.wav'),
             door: new Audio('audio/door.wav'),
@@ -111,7 +114,7 @@ class Player {
         allEnemies.forEach( (bug) => {
             if (Math.round(bug.x) < this.x && Math.round(bug.x) > this.x - 100) {
                 if (Math.round(bug.y === this.y)) {
-                    this.playSound("bug");
+                    this.audio.bug.play();
                     this.health -=1;
                     $(".health").text(this.health);
                     this.x = 0;
@@ -119,6 +122,17 @@ class Player {
                 }
             }
         });
+
+        allItems.forEach( (item) => {
+            if ( item.x === this.x ) {
+                if (Math.round(item.y === this.y)) {
+                    this.collectItems(item.item);
+                    item.x = -200;
+                }
+            }
+        });
+
+        allItems.in
         // Player enters water, returned to starting position
         if (this.y === -27 ) {
             this.x = 0;
@@ -127,19 +141,83 @@ class Player {
         }
     }
 
-    playSound(sound) {
-            switch (sound) {
-                case "bug":
-                    this.audio.bug.play();
+    collectItems(item) {
+            switch (item) {
+                case "key": {
+                    this.audio.key.play();
+                    this.points += 50;
+                    $(".points").text(this.points);
+                    $(".key").text(Number($(".key").text()) + 1 );
                     break;
+                }
+                case "star": {
+                    this.audio.gem.play();
+                    this.points += 100;
+                    $(".points").text(this.points);
+                    $(".star").text(Number($(".star").text()) + 1 );
+                    break;
+                }
+                case "gem-blue": {
+                    this.audio.gem.play();
+                    this.points += 150;
+                    $(".points").text(this.points);
+                    $(".gem-blue").text(Number($(".gem-blue").text()) + 1 );
+                    break;
+                }
+                case "gem-green": {
+                    this.audio.gem.play();
+                    this.points += 250;
+                    $(".points").text(this.points);
+                    $(".gem-green").text(Number($(".gem-green").text()) + 1 );
+                    break;
+                }
+                case "gem-orange": {
+                    this.audio.gem.play();
+                    this.points += 500;
+                    $(".points").text(this.points);
+                    $(".gem-orange").text(Number($(".gem-orange").text()) + 1 );
+                    break;
+                }
+                case "heart": {
+                    this.audio.heart.play();
+                    this.health += 1;
+                    $(".health").text(this.health);
+                    $(".health").text(Number($(".health").text()) );
+                    break;
+                }
             }
     }
 
 }
 
+class Item {
+    constructor(sprite, x, y, item) {
+        this.sprite = sprite;
+        this.x = x;
+        this.y = y;
+        this.item = item;
+        allItems.push(this);
+    }
+
+    update(dt) {
+
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+let key = new Item('images/key.png', 404, 313, "key");
+let star = new Item('images/star.png', 303, 143, "star");
+let gemBlue = new Item('images/gem-blue.png', 101, 143, "gem-blue");
+let gemGreen = new Item('images/gem-green.png', 202, 143, "gem-green");
+let gemOrange = new Item('images/gem-orange.png', 404, 143, "gem-orange");
+let heart = new Item('images/heart.png', 404, 228, "heart");
+
 let enemy1 = new Enemy(-100, 58);
 let enemy2 = new Enemy(-100, 58);
 let enemy3 = new Enemy(-200, 143);
@@ -148,6 +226,8 @@ let enemy5 = new Enemy(-200, 228);
 let enemy6 = new Enemy(-300, 228);
 let enemy7 = new Enemy(-398, 313);
 let enemy8 = new Enemy(-398, 313);
+
+
 
 let player = new Player('images/horn-girl.png', 0, 483);
 

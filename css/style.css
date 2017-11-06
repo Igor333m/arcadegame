@@ -5,13 +5,13 @@ body {
 }
 
 header {
-	width: 909px;
+	width: auto;
 	height: 60px;
 	margin: auto;
 }
 
 img {
-	width: 4%;
+	width: 3%;
 	/*border: 1px solid red;*/
 
 }
