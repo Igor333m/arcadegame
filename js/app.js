@@ -55,6 +55,13 @@ class Player {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
+        this.audio = {
+            bug: new Audio('audio/bug.wav'),
+            door: new Audio('audio/door.wav'),
+            key: new Audio('audio/key.wav'),
+            heart: new Audio('audio/heart.wav'),
+            gem: new Audio('audio/gem.wav')
+        }
     }
 
     render() {
@@ -101,15 +108,26 @@ class Player {
     update(dt) {
         allEnemies.forEach( (bug) => {
             if (Math.round(bug.x) < this.x && Math.round(bug.x) > this.x - 100) {
-                console.log("hi: x");
                 if (Math.round(bug.y === this.y)) {
-                    console.log("hi: y");
+                    this.playSound("bug");
                     this.x = 0;
                     this.y = 483;
                 }
             }
-            console.log();
         });
+        if (this.y === -27 ) {
+            this.x = 0;
+            this.y = 483;
+            console.log("One point");
+        }
+    }
+
+    playSound(sound) {
+            switch (sound) {
+                case "bug":
+                    this.audio.bug.play();
+                    break;
+            }
     }
 
 }
