@@ -318,7 +318,9 @@ function restartGame() {
     // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-    key = new Item('images/key.png', 404, 313, "key");
+    setTimeout( () => {
+        key = new Item('images/key.png', 404, 313, "key");
+    }, 30000);
     star = new Item('images/star.png', 303, 143, "star");
     gemBlue = new Item('images/gem-blue.png', 101, 143, "gem-blue");
     gemGreen = new Item('images/gem-green.png', 202, 143, "gem-green");
