@@ -1,6 +1,40 @@
-frontend-nanodegree-arcade-game
+Classic Arcade Game Clone 2017
 ===============================
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+In this game you have a Player and Enemies (Bugs). The goal of the player is to collect items and get points, without colliding into any one of the enemies.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## Table of Contents
+
+* [Link to a game on github Pages](#game-link)
+* [Game Preview](#game-preview)
+* [Description of original game on Wikipedia](#from-wikipedia-the-free-encyclopedia)
+* [Game implementation](#implementation)
+* [Technology used](#technology-used)
+* [Thank you](#thank-you)
+
+## Game link
+
+https://igor333m.github.io/arcadegame/
+
+## Game preview
+
+![Memory Game Preview](images/gamepreview.png)
+
+## From Wikipedia, the free encyclopedia
+
+https://en.wikipedia.org/wiki/Frogger
+
+## Implementation
+
+ The goal of the player is to collect items and get points, without colliding into any one of the enemies. The player can move left, right, up and down. The enemies move in varying speeds on the paved block portion of the scene. Once a the player collides with an enemy, loses one health and moves back to the start square. Player can collect different items to get points. Game is over when player lose all heath.
+
+## Technology used
+
+This game is build using HTML, CSS, JavaScript, jQuery, jQuery Transit plugin and HTML Canvas.
+http://ricostacruz.com/jquery.transit/
+
+## Thank you
+
+# Udacity 
+
+For this amazing experience
