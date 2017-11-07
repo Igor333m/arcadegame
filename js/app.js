@@ -3,13 +3,13 @@ let allEnemies = [];
 
 let allItems = [];
 
-let gemOrangePoints = $(".gem-orange");
-let gemGreenPoints = $(".gem-green");
-let gemBluePoints = $(".gem-blue");
+const gemOrangePoints = $(".gem-orange");
+const gemGreenPoints = $(".gem-green");
+const gemBluePoints = $(".gem-blue");
 
 // Canvas tiles coordinates
-let randomPositionX = [0, 101, 202, 303, 404, 505, 606, 707];
-let randomPositionY = [313, 228, 143, 58];
+const randomPositionX = [0, 101, 202, 303, 404, 505, 606, 707];
+const randomPositionY = [313, 228, 143, 58];
 
 // Enemies our player must avoid
 let Enemy = function(x, y) {
@@ -146,9 +146,8 @@ class Player {
         allItems.in
         // Player enters water, returned to starting position
         if (this.y === -27 ) {
-            this.x = 0;
+            this.x = 303;
             this.y = 483;
-            console.log("One point");
         }
     }
 
@@ -297,7 +296,7 @@ let restartClick = $(".restart").click(function() {
 });
 
 /**
-* @descripton Restarts the game, moves, stars, time and hides the modal
+* @descripton Restarts the game and hides the modal
 * @returns {undefined}
 */
 function restartGame() {
@@ -321,10 +320,12 @@ function restartGame() {
     setTimeout( () => {
         key = new Item('images/key.png', 404, 313, "key");
     }, 30000);
+    setTimeout( () => {
+        gemOrange = new Item('images/gem-orange.png', 404, 58, "gem-orange");
+    }, 15000);
     star = new Item('images/star.png', 303, 143, "star");
     gemBlue = new Item('images/gem-blue.png', 101, 143, "gem-blue");
     gemGreen = new Item('images/gem-green.png', 202, 143, "gem-green");
-    gemOrange = new Item('images/gem-orange.png', 404, 58, "gem-orange");
     heart = new Item('images/heart.png', 404, 228, "heart");
 
     enemy1 = new Enemy(-100, 58);
