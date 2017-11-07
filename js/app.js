@@ -1,6 +1,6 @@
-
+// Array full of enemies
 let allEnemies = [];
-
+// Item array
 let allItems = [];
 
 const gemOrangePoints = $(".gem-orange");
@@ -11,29 +11,27 @@ const gemBluePoints = $(".gem-blue");
 const randomPositionX = [0, 101, 202, 303, 404, 505, 606, 707];
 const randomPositionY = [313, 228, 143, 58];
 
-// Enemies our player must avoid
+/**
+* @description Enemies our player must avoid
+* @param {number} x - Player x coordinate
+* @param {number} y - Player y coordinate
+*/
 let Enemy = function(x, y) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+
     allEnemies.push(this);
     //this.randomSpeed = this.speed();
     this.bugSpeed = this.speed();
 
     this.x = x;
     this.y = y;
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // The image/sprite for our enemies
     this.sprite = 'images/enemy-bug.png';
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     this.x += Math.round(dt * this.bugSpeed);
-    // console.log("bX: " + this.x + " , y: " + this.y);
     if (this.x >= 900) {
         this.x = -200;
         this.speed();
@@ -41,6 +39,7 @@ Enemy.prototype.update = function(dt) {
 
 };
 
+// Set random speed for bugs
 Enemy.prototype.speed = function() {
     let speed = Math.floor(Math.random() * 300) + 200;
     setTimeout( () => {
@@ -50,15 +49,18 @@ Enemy.prototype.speed = function() {
 
 
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
+/**
+* @description Player class
+* @constructor
+* @param {string} sprite - Player image
+* @param {number} x - Player x coordinate
+* @param {number} y - Player y coordinate
+*/
 class Player {
     constructor(sprite, x, y) {
         this.sprite = sprite;
@@ -74,11 +76,16 @@ class Player {
             gem: new Audio('audio/gem.wav')
         }
     }
-
+    /**
+    * Renders the player
+    */
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-
+    /**
+    * Moves the player using arrow keys
+    * @param {string} key - Arrow key pressed
+    */
     handleInput(key) {
         
         switch (key) {
@@ -115,9 +122,11 @@ class Player {
                 break;
         }
     }
-
+    /**
+    * Player interaction with bugs, items and water
+    */
     update(dt) {
-        // Player coallision with bug, returned to starting position
+        // Player coallision with bug, lose health, return to starting position
         allEnemies.forEach( (bug) => {
             if (Math.round(bug.x) < this.x && Math.round(bug.x) > this.x - 100) {
                 if (Math.round(bug.y === this.y)) {
@@ -132,7 +141,7 @@ class Player {
                 }
             }
         });
-
+        // player collects items and hide items
         allItems.forEach( (item) => {
             if ( item.x === this.x ) {
                 if (Math.round(item.y === this.y)) {
@@ -150,7 +159,10 @@ class Player {
             this.y = 483;
         }
     }
-
+    /**
+    * Check what item player collect, play sound, add points
+    * @param {string} item
+    */
     collectItems(item) {
             switch (item) {
                 case "key": {
@@ -200,6 +212,14 @@ class Player {
 
 }
 
+/**
+* @description Item class
+* @constructor
+* @param {string} sprite - Item image
+* @param {number} x - Item x coordinate
+* @param {number} y - Item y coordinate
+* @param {string} item - Type of item
+*/
 class Item {
     constructor(sprite, x, y, item) {
         this.sprite = sprite;
@@ -213,13 +233,21 @@ class Item {
 
     }
 
+    /**
+    * Renders the player
+    */
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
+    /**
+    * @description After player collects the item, it disappears and show after some time
+    * @param {string} item
+    */
     randomizeItems(item) {
 
         switch (item) {
+            // Use key to go to next level
             case "key": {
                 // TODO: Add new level
                 break;
@@ -268,6 +296,9 @@ class Item {
     }
 }
 
+/**
+* @description When health reach 0, show end game modal with won points, keys, stars and gems
+*/
 function gameOver() {
     $("#winPoints").text(player.points);
     $("#winKeys").text($(".key").text());
@@ -281,11 +312,18 @@ function gameOver() {
 
 }
 
-
+/**
+* @description Get random number for randomPositionX, to to set new x for items
+* @returns {number} Random number between 0 and 7
+*/
 function randomizeItemsX() {
     return Math.floor(Math.random() * 7);
 }
 
+/**
+* @description Get random number for randomPositionY, to to set new y for items
+* @returns {number} Random number between 0 and 3
+*/
 function randomizeItemsY() {
     return Math.floor(Math.random() * 3);
 }
@@ -296,7 +334,7 @@ let restartClick = $(".restart").click(function() {
 });
 
 /**
-* @descripton Restarts the game and hides the modal
+* @descripton Restarts the game, hides the modal
 * @returns {undefined}
 */
 function restartGame() {
@@ -314,9 +352,7 @@ function restartGame() {
     // Set win checker to start position
     $(".checker").transition({
         "background-position": "0 0"});
-    // Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+    // Add key, heart, star and gems to the game
     setTimeout( () => {
         key = new Item('images/key.png', 404, 313, "key");
     }, 30000);
@@ -328,6 +364,7 @@ function restartGame() {
     gemGreen = new Item('images/gem-green.png', 202, 143, "gem-green");
     heart = new Item('images/heart.png', 404, 228, "heart");
 
+    // Add enemies to the game
     enemy1 = new Enemy(-100, 58);
     enemy2 = new Enemy(-100, 58);
     enemy3 = new Enemy(-200, 143);
@@ -338,9 +375,7 @@ function restartGame() {
     enemy8 = new Enemy(-398, 313);
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// All objects
 let enemy1;
 let enemy2;
 let enemy3;
@@ -357,15 +392,10 @@ let gemGreen;
 let gemOrange;
 let heart;
 
+// Add player to the game
 let player = new Player('images/horn-girl.png', 303, 483);
 
-
-
-// Adds selected caracter image for points
-$(".caracter-points img:nth-child(2)").attr("src", player.sprite);
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// This listens for arrow keys
 document.addEventListener('keyup', function(e) {
     let allowedKeys = {
         37: 'left',
