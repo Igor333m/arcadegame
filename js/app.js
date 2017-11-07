@@ -7,6 +7,10 @@ let gemOrangePoints = $(".gem-orange");
 let gemGreenPoints = $(".gem-green");
 let gemBluePoints = $(".gem-blue");
 
+// Canvas tiles coordinates
+let randomPositionX = [0, 101, 202, 303, 404, 505, 606, 707];
+let randomPositionY = [313, 228, 143, 58];
+
 // Enemies our player must avoid
 let Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
@@ -134,6 +138,7 @@ class Player {
                 if (Math.round(item.y === this.y)) {
                     this.collectItems(item.item);
                     item.x = -200;
+                    item.randomizeItems(item.item);
                 }
             }
         });
@@ -212,6 +217,56 @@ class Item {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
+
+    randomizeItems(item) {
+
+        switch (item) {
+            case "key": {
+                // TODO: Add new level
+                break;
+            }
+            case "star": {
+                setTimeout( () => {
+                    this.x = randomPositionX[randomizeItemsX()];
+                    this.y = randomPositionY[randomizeItemsY()];
+                    console.log(this.y);
+                }, 3000);
+                break;
+            }
+            case "gem-blue": {
+                setTimeout( () => {
+                    this.x = randomPositionX[randomizeItemsX()];
+                    this.y = randomPositionY[randomizeItemsY()];
+                    console.log(this.y);
+                }, 5000);
+                break;
+            }
+            case "gem-green": {
+                setTimeout( () => {
+                    this.x = randomPositionX[randomizeItemsX()];
+                    this.y = randomPositionY[randomizeItemsY()];
+                    console.log(this.y);
+                }, 7000);
+                break;
+            }
+            case "gem-orange": {
+                setTimeout( () => {
+                    this.x = randomPositionX[randomizeItemsX()];
+                    this.y = 58;
+                    console.log(this.y);
+                }, 20000);
+                break;
+            }
+            case "heart": {
+                setTimeout( () => {
+                    this.x = randomPositionX[randomizeItemsX()];
+                    this.y = randomPositionY[randomizeItemsY()];
+                    console.log(this.y);
+                }, 35000);
+                break;
+            }
+        }
+    }
 }
 
 function gameOver() {
@@ -225,6 +280,15 @@ function gameOver() {
         "background-position": "-7980px 0",
         transition: "background 1s steps(38)"});
 
+}
+
+
+function randomizeItemsX() {
+    return Math.floor(Math.random() * 7);
+}
+
+function randomizeItemsY() {
+    return Math.floor(Math.random() * 3);
 }
 
 // Restart button
@@ -258,7 +322,7 @@ function restartGame() {
     star = new Item('images/star.png', 303, 143, "star");
     gemBlue = new Item('images/gem-blue.png', 101, 143, "gem-blue");
     gemGreen = new Item('images/gem-green.png', 202, 143, "gem-green");
-    gemOrange = new Item('images/gem-orange.png', 404, 143, "gem-orange");
+    gemOrange = new Item('images/gem-orange.png', 404, 58, "gem-orange");
     heart = new Item('images/heart.png', 404, 228, "heart");
 
     enemy1 = new Enemy(-100, 58);
@@ -274,13 +338,6 @@ function restartGame() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let key;
-let star;
-let gemBlue;
-let gemGreen;
-let gemOrange;
-let heart;
-
 let enemy1;
 let enemy2;
 let enemy3;
@@ -290,7 +347,12 @@ let enemy6;
 let enemy7;
 let enemy8;
 
-
+let key;
+let star;
+let gemBlue;
+let gemGreen;
+let gemOrange;
+let heart;
 
 let player = new Player('images/horn-girl.png', 303, 483);
 
