@@ -22,7 +22,7 @@ https://igor333m.github.io/arcadegame/
 
 ## From Wikipedia, the free encyclopedia
 
-Original [Frogger game] on Wikipedia (https://en.wikipedia.org/wiki/Frogger)
+Original [Frogger game](https://en.wikipedia.org/wiki/Frogger) on Wikipedia.
 
 ## Implementation
 
