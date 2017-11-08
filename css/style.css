@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    font-family: 'Inconsolata', monospace;
+    font-family: "Inconsolata", monospace;
     font-weight: 700;
 }
 
@@ -105,9 +105,9 @@ button {
     border-radius: 10px;
     color: white;
     border: none;
-    -webkit-box-shadow: 3px 3px 5px 0px rgba(0,9,102,0.6);
-    -moz-box-shadow: 3px 3px 5px 0px rgba(0,9,102,0.6);
-    box-shadow: 3px 3px 5px 0px rgba(0,9,102,0.6);
+    -webkit-box-shadow: 3px 3px 5px 0 rgba(0,9,102,0.6);
+    -moz-box-shadow: 3px 3px 5px 0 rgba(0,9,102,0.6);
+    box-shadow: 3px 3px 5px 0 rgba(0,9,102,0.6);
 }
 
 button:hover {
