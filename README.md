@@ -7,6 +7,7 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 
 * [Link to a game on github Pages](#game-link)
 * [Game Preview](#game-preview)
+* [How to run the game](#how-to-run-the-game)
 * [Description of original game on Wikipedia](#from-wikipedia-the-free-encyclopedia)
 * [Game implementation](#implementation)
 * [Technology used](#technology-used)
@@ -19,6 +20,11 @@ https://igor333m.github.io/arcadegame/
 ## Game preview
 
 ![Memory Game Preview](images/gamepreview.png)
+
+## How to run the game
+
+Download zip file, unzip, open index.html and play. Or use Game link to play.
+Use keyboard arrows keys to move up, down, left and right.
 
 ## From Wikipedia, the free encyclopedia
 
