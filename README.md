@@ -41,6 +41,6 @@ http://ricostacruz.com/jquery.transit/
 
 ## Thank you
 
-# Udacity 
+## Udacity 
 
 For this amazing experience
